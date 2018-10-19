@@ -1,5 +1,5 @@
 name: shelf_response_formatter
-version: 0.1.0
+version: 1.0.0
 description: >
   Simple extensible response formatter which detects appropriate response format
   and serializes data accordingly.
