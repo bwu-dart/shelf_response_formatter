@@ -8,33 +8,36 @@ import 'package:xml/xml.dart';
 /// nodes calling toString.
 class XmlConverter {
   /// Convert method takes data a returns it as XML [String]
-  String convert([dynamic data]) {
-    return toXml(data).toXmlString(pretty: true);
-  }
+  String convert([Object data]) => toXml(data).toXmlString(pretty: true);
 
   /// Converts given data into an [XmlElement].
-  XmlElement toXml([dynamic data]) {
-    var builder = new XmlBuilder();
+  XmlElement toXml([Object data]) {
+    final builder = XmlBuilder();
 //    builder.processing('xml', 'version="1.0"');
     builder.element('response', nest: () => _createNode(builder, data));
-    return builder.build().firstChild;
+    return builder.build().firstChild as XmlElement;
   }
 
   // internal recursive converter
-  void _createNode(XmlBuilder builder, dynamic data) {
-    if (data == null) return;
+  void _createNode(XmlBuilder builder, Object data) {
+    if (data == null) {
+      return;
+    }
 
     if (data is Iterable) {
       data
-          .map((item) =>
+          // ignore: avoid_types_on_closure_parameters
+          .map((Object item) =>
               builder.element('item', nest: () => _createNode(builder, item)))
           .toList(growable: false);
       return;
     }
 
     if (data is Map) {
-      data.forEach((name, value) {
-        builder.element(name, nest: () => _createNode(builder, value));
+      // ignore: avoid_types_on_closure_parameters
+      data.forEach((Object name, Object value) {
+        builder.element(name as String,
+            nest: () => _createNode(builder, value));
       });
       return;
     }
@@ -42,12 +45,7 @@ class XmlConverter {
     builder.text(data.toString());
   }
 
-  factory XmlConverter() {
-    if (instance == null) {
-      instance = new XmlConverter._create();
-    }
-    return instance;
-  }
+  factory XmlConverter() => instance ??= XmlConverter._create();
 
   // singleton instance
   static XmlConverter instance;

@@ -29,13 +29,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  bwu_grinder_tasks:
-    dependency: "direct dev"
-    description:
-      name: bwu_grinder_tasks
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0-dev.0"
   charcode:
     dependency: transitive
     description:
