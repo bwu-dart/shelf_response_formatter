@@ -41,7 +41,8 @@ void main() {
   <item>1</item>
   <item>2</item>
 </response>
-'''.replaceAll('\n', '');
+'''
+        .replaceAll('\n', '');
     expect(c.convert([0, 1, 2]).replaceAll('\n', ''), equals(expected));
   });
 
@@ -52,7 +53,8 @@ void main() {
   <item>asdf</item>
   <item>true</item>
 </response>
-'''.replaceAll('\n', '');
+'''
+        .replaceAll('\n', '');
     expect(c.convert([0, "asdf", true]).replaceAll('\n', ''), equals(expected));
   });
 
@@ -63,19 +65,20 @@ void main() {
   <b>asdf</b>
   <c>true</c>
 </response>
-'''.replaceAll('\n', '');
+'''
+        .replaceAll('\n', '');
 
     expect(c.convert({"a": 1, "b": "asdf", "c": true}).replaceAll('\n', ''),
         equals(expected));
   });
 
   test("convert with array of map mixed data returns response string", () {
-    expect(c
-        .convert([
-      {"a": 1, "b": "asdf", "c": false},
-      {"a": 2, "b": "qwer", "c": true}
-    ])
-        .replaceAll('\n', ''), equals('''
+    expect(
+        c.convert([
+          {"a": 1, "b": "asdf", "c": false},
+          {"a": 2, "b": "qwer", "c": true}
+        ]).replaceAll('\n', ''),
+        equals('''
 <response>
   <item>
     <a>1</a>
@@ -87,7 +90,8 @@ void main() {
     <b>qwer</b>
     <c>true</c>
   </item>
-</response>'''.replaceAll('\n', '')));
+</response>'''
+            .replaceAll('\n', '')));
   });
 
   test("convert with map of array data returns response string", () {
@@ -104,9 +108,13 @@ void main() {
     <item>22.55566</item>
   </b>
 </response>
-'''.replaceAll('\n', '');
-    expect(c
-        .convert({"a": [0, 1, 2], "b": [true, "asdf", 22.55566]})
-        .replaceAll('\n', ''), equals(expected));
+'''
+        .replaceAll('\n', '');
+    expect(
+        c.convert({
+          "a": [0, 1, 2],
+          "b": [true, "asdf", 22.55566]
+        }).replaceAll('\n', ''),
+        equals(expected));
   });
 }

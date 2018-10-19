@@ -7,7 +7,6 @@ import 'package:xml/xml.dart';
 /// [Map] and [List] are iterated recursively all other types are added as text
 /// nodes calling toString.
 class XmlConverter {
-
   /// Convert method takes data a returns it as XML [String]
   String convert([dynamic data]) {
     return toXml(data).toXmlString(pretty: true);
@@ -22,26 +21,25 @@ class XmlConverter {
   }
 
   // internal recursive converter
-  _createNode(XmlBuilder builder, dynamic data) {
-    if (data == null) return null;
+  void _createNode(XmlBuilder builder, dynamic data) {
+    if (data == null) return;
 
     if (data is Iterable) {
-      return data
+      data
           .map((item) =>
               builder.element('item', nest: () => _createNode(builder, item)))
           .toList(growable: false);
+      return;
     }
 
     if (data is Map) {
-      var children = [];
       data.forEach((name, value) {
-        children.add(
-            builder.element(name, nest: () => _createNode(builder, value)));
+        builder.element(name, nest: () => _createNode(builder, value));
       });
-      return children;
+      return;
     }
 
-    return builder.text(data.toString());
+    builder.text(data.toString());
   }
 
   factory XmlConverter() {

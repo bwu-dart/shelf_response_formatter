@@ -7,7 +7,6 @@ import 'xml_converter.dart';
 typedef String Formatter(dynamic data);
 
 class ResponseFormatter {
-
   /// Map of accept headers to response formats.
   Map<String, String> acceptMappings = {
     "application/xml": "xml",
@@ -135,7 +134,7 @@ class FormatResult {
 
 /// Encodes the response data as Json
 String jsonFormatter(data) {
-  return JSON.encode(data, toEncodable: (dynamic obj) {
+  return json.encode(data, toEncodable: (dynamic obj) {
     return obj.toString();
   });
 }

@@ -28,8 +28,8 @@ void main() {
       createShelfRequest('GET', '/asdf/qwer?format=json');
   shelf.Request fileFormatXml = createShelfRequest('GET', '/asdf/qwer.xml');
   shelf.Request fileFormatJson = createShelfRequest('GET', '/asdf/qwer.json');
-  shelf.Request chromeGetRequest = createShelfRequest('GET',
-      '/asdf/qwer&format=xml', {
+  shelf.Request chromeGetRequest =
+      createShelfRequest('GET', '/asdf/qwer&format=xml', {
     'accept':
         'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
   });
@@ -61,25 +61,32 @@ void main() {
     });
 
     test("returns json response from map data", () {
-      var data = {"a": "b", "c": ["a", "b", "c"]};
+      var data = {
+        "a": "b",
+        "c": ["a", "b", "c"]
+      };
       var queryJsonRes = formatter.formatResponse(queryFormatJson, data);
       var fileJsonRes = formatter.formatResponse(fileFormatJson, data);
       var queryJsonString = queryJsonRes.body;
       var fileJsonString = fileJsonRes.body;
       expect(queryJsonString, equals(fileJsonString));
-      expect(data, equals(JSON.decode(queryJsonString)));
+      expect(data, equals(json.decode(queryJsonString)));
       expect(queryJsonRes.contentType, equals("application/json"));
       expect(fileJsonRes.contentType, equals("application/json"));
     });
 
     test("returns json response from array", () {
-      var data = [{"a": 1}, {"a": 2}, {"a": 3}];
+      var data = [
+        {"a": 1},
+        {"a": 2},
+        {"a": 3}
+      ];
       var queryJsonRes = formatter.formatResponse(queryFormatJson, data);
       var fileJsonRes = formatter.formatResponse(fileFormatJson, data);
       var queryJsonString = queryJsonRes.body;
       var fileJsonString = fileJsonRes.body;
       expect(queryJsonString, equals(fileJsonString));
-      expect(data, equals(JSON.decode(queryJsonString)));
+      expect(data, equals(json.decode(queryJsonString)));
       expect(queryJsonRes.contentType, equals("application/json"));
       expect(fileJsonRes.contentType, equals("application/json"));
     });
@@ -89,9 +96,13 @@ void main() {
     });
 
     test("returns xml response from strange request", () {
-      expect(formatter.formatResponse(fileFormatXml, {"a": 0}).body
-          .replaceAll('\n', '')
-          .replaceAll(' ', ''), equals("<response><a>0</a></response>"));
+      expect(
+          formatter
+              .formatResponse(fileFormatXml, {"a": 0})
+              .body
+              .replaceAll('\n', '')
+              .replaceAll(' ', ''),
+          equals("<response><a>0</a></response>"));
     });
 
     test("calls to string on non covertible objects in XML", () {

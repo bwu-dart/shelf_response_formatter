@@ -9,13 +9,13 @@ authors:
 - Thomas Profelt <tom@octobyte.at>
 
 environment:
-  sdk: '>=1.0.0 <2.0.0'
+  sdk: '>=2.0.0 <3.0.0'
 
 dependencies:
-  shelf: '>=0.6.0 <0.7.0'
-  xml: '>=2.1.0 <3.0.0'
+  shelf: '>=0.7.0 <0.8.0'
+  xml: '>=3.0.0 <4.0.0'
 
 dev_dependencies:
-  bwu_grinder_tasks: '>=0.1.0 <0.2.0'
-  grinder: '>=0.7.2 <0.8.0'
-  test: '>=0.12.0 <0.13.0'
+  bwu_grinder_tasks: '>=0.2.0-dev.0 <0.3.0'
+  grinder: '>=0.8.0 <0.9.0'
+  test: '>=1.0.0 <2.0.0'
