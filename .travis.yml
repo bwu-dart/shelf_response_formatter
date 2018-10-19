@@ -8,7 +8,7 @@ dart:
 #  - PUB=DOWNGRADE
 #  - PUB=UPGRADE
 
-script: dart -c tool/grind.dart travis
+script: tool/travis.sh
 
 # Speed up builds by using containerization. Disable this if you need to use
 # sudo in your scripts.
